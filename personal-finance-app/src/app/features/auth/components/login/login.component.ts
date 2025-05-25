@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Added CommonModule
+import { ButtonModule } from 'primeng/button'; // Added ButtonModule
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'] // Corrected styleUrl to styleUrls
+  styleUrls: ['./login.component.css'], // Corrected styleUrl to styleUrls
+  standalone: true, // Added standalone: true
+  imports: [
+    CommonModule,
+    ButtonModule
+  ]
 })
 export class LoginComponent implements OnInit {
   user: SocialUser | null = null;
 
-  constructor(private authService: SocialAuthService, private router: Router) {}
+  constructor(public authService: SocialAuthService, private router: Router) {} // Made authService public for template access
 
   ngOnInit() {
     this.authService.authState.subscribe((user) => {

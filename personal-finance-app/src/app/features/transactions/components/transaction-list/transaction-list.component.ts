@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Added CommonModule
+import { TableModule } from 'primeng/table'; // Added TableModule
+import { TagModule } from 'primeng/tag'; // Added TagModule
+import { SharedModule } from '../../../../shared/shared.module'; // Added SharedModule
 
 interface Transaction {
   id: string;
@@ -11,7 +15,14 @@ interface Transaction {
 @Component({
   selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.css']
+  styleUrls: ['./transaction-list.component.css'],
+  standalone: true, // Added standalone: true
+  imports: [
+    CommonModule,
+    TableModule,
+    TagModule,
+    SharedModule // For CurrencyFormatPipe
+  ]
 })
 export class TransactionListComponent implements OnInit {
   mockTransactions: Transaction[] = [];

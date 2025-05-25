@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './components/login/login.component';
-
+import { LoginComponent } from './components/login/login.component'; // Ensure LoginComponent is imported
 
 @NgModule({
   declarations: [
-    LoginComponent
+    // LoginComponent removed
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    LoginComponent // Add LoginComponent here
   ],
   providers: [
     {
