@@ -1,0 +1,69 @@
+<div class="settings-container p-fluid">
+  <h2>Settings</h2>
+
+  <p-card header="Storage Configuration">
+    <div class="p-field p-grid">
+      <label for="storageProvider" class="p-col-12 p-md-3">Storage Provider:</label>
+      <div class="p-col-12 p-md-9">
+        <p-selectButton [options]="storageOptions" [(ngModel)]="selectedStorageProvider" optionLabel="name" optionValue="value" (onChange)="onStorageProviderChange()"></p-selectButton>
+      </div>
+    </div>
+
+    <div *ngIf="selectedStorageProvider === 's3'" class="s3-credentials-form">
+      <p>Please enter your AWS S3 credentials:</p>
+      <div class="p-field p-grid">
+        <label for="s3AccessKeyId" class="p-col-12 p-md-3">Access Key ID:</label>
+        <div class="p-col-12 p-md-9">
+          <input type="text" pInputText id="s3AccessKeyId" [(ngModel)]="s3Credentials.accessKeyId" placeholder="Enter Access Key ID">
+        </div>
+      </div>
+      <div class="p-field p-grid">
+        <label for="s3SecretAccessKey" class="p-col-12 p-md-3">Secret Access Key:</label>
+        <div class="p-col-12 p-md-9">
+          <input type="password" pInputText id="s3SecretAccessKey" [(ngModel)]="s3Credentials.secretAccessKey" placeholder="Enter Secret Access Key">
+        </div>
+      </div>
+      <div class="p-field p-grid">
+        <label for="s3Region" class="p-col-12 p-md-3">Region:</label>
+        <div class="p-col-12 p-md-9">
+          <input type="text" pInputText id="s3Region" [(ngModel)]="s3Credentials.region" placeholder="e.g., us-east-1">
+        </div>
+      </div>
+      <div class="p-field p-grid">
+        <label for="s3BucketName" class="p-col-12 p-md-3">Bucket Name:</label>
+        <div class="p-col-12 p-md-9">
+          <input type="text" pInputText id="s3BucketName" [(ngModel)]="s3Credentials.bucketName" placeholder="Enter Bucket Name">
+        </div>
+      </div>
+    </div>
+  </p-card>
+
+  <p-card header="Currency Configuration" class="p-mt-3">
+    <div class="p-field p-grid">
+      <label for="commonCurrencies" class="p-col-12 p-md-3">Common Currencies:</label>
+      <div class="p-col-12 p-md-9">
+        <p-dropdown [options]="commonCurrencies" formControlName="currencySymbol" placeholder="Select or Type Symbol" [editable]="true"></p-dropdown>
+        <!-- The editable p-dropdown allows both selection and manual input.
+             The formControlName="currencySymbol" binds it to the reactive form. -->
+      </div>
+    </div>
+    <!-- The input below is removed as p-dropdown with editable=true handles both cases.
+         If separate input was strictly needed, it would also be bound to formControlName="currencySymbol"
+         or a different form control with logic to merge/prioritize.
+    <div class="p-field p-grid">
+      <label for="currencySymbolInput" class="p-col-12 p-md-3">Manual Symbol:</label>
+      <div class="p-col-12 p-md-9">
+        <input type="text" pInputText id="currencySymbolInput" formControlName="currencySymbol" placeholder="e.g., $">
+      </div>
+    </div>
+    -->
+  </p-card>
+
+  <div class="p-d-flex p-jc-end p-mt-3">
+      <button pButton type="button" label="Save Settings" icon="pi pi-save" (click)="saveSettings()" [disabled]="settingsForm.invalid"></button>
+    </div>
+  </p-card>
+</div>
+
+<!-- For Toast Messages (Optional, but good practice) -->
+<p-toast></p-toast>
