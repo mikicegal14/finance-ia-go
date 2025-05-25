@@ -3,35 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import FormsModule and ReactiveFormsModule
 
 import { SettingsRoutingModule } from './settings-routing.module';
-import { SettingsComponent } from './components/settings/settings.component';
+import { SettingsComponent } from './components/settings/settings.component'; // Ensure SettingsComponent is imported
 
-// PrimeNG Modules
-import { CardModule } from 'primeng/card';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
-import { DropdownModule } from 'primeng/dropdown'; // Import DropdownModule
-import { MessageService } from 'primeng/api';
+// PrimeNG Modules and FormsModule/ReactiveFormsModule are now imported by SettingsComponent directly.
+// MessageService is provided in SettingsComponent.
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    // SettingsComponent removed
   ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
-    FormsModule,          // Add FormsModule
-    ReactiveFormsModule,  // Add ReactiveFormsModule
-    CardModule,
-    SelectButtonModule,
-    InputTextModule,
-    ButtonModule,
-    ToastModule,
-    DropdownModule      // Add DropdownModule here
+    SettingsComponent // Add SettingsComponent here
+    // FormsModule, ReactiveFormsModule, and PrimeNG modules removed
   ],
   providers: [
-    MessageService // Provide MessageService if you use p-toast
+    // MessageService removed
   ]
 })
 export class SettingsModule { }

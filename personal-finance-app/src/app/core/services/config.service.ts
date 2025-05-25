@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, from, of, throwError } from 'rxjs';
 import { map, switchMap, catchError, tap, filter, first } from 'rxjs/operators';
+import { Buffer } from 'buffer';
 import { AppConfig, StorageProvider, S3Credentials } from '../models/app-config.model';
 import { GoogleApiService } from './google-api.service';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
@@ -12,10 +13,19 @@ const LOCAL_STORAGE_KEY = 'appConfig';
 // Helper function to convert S3 GetObjectCommand's Body (ReadableStream) to string
 const streamToString = (stream: any): Promise<string> => // Type 'any' for stream for broader compatibility
   new Promise((resolve, reject) => {
-    const chunks: Uint8Array[] = []; // Use Uint8Array for chunks
+    const chunks: Uint8Array[] = [];
     stream.on("data", (chunk: Uint8Array) => chunks.push(chunk));
     stream.on("error", reject);
-    stream.on("end", () => resolve(Buffer.from(chunks.reduce((acc, chunk) => acc.concat(Array.from(chunk)), [])).toString("utf-8")));
+    stream.on("end", () => {
+      const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+      const combinedChunks = new Uint8Array(totalLength);
+      let offset = 0;
+      for (const chunk of chunks) {
+        combinedChunks.set(chunk, offset);
+        offset += chunk.length;
+      }
+      resolve(Buffer.from(combinedChunks).toString("utf-8"));
+    });
   });
 
 
@@ -326,7 +336,7 @@ export class ConfigService {
       }
       // If S3 is selected and s3CredentialsInput is null/undefined, but currentConfig.s3Credentials exist,
       // it implies we want to continue using the existing S3 credentials.
-    } else if (provider !== 's3') { // Clear S3 credentials if provider is not S3
+    } else { // Clear S3 credentials if provider is not S3
         newS3Credentials = null;
     }
 

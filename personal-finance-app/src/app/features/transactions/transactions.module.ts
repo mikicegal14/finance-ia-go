@@ -2,25 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TransactionsRoutingModule } from './transactions-routing.module';
-import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
-import { SharedModule } from '../../shared/shared.module'; // Import SharedModule
-import { TableModule } from 'primeng/table'; // Import TableModule
-import { TagModule } from 'primeng/tag'; // Import TagModule
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component'; // Ensure TransactionListComponent is imported
+// SharedModule, TableModule, TagModule are now imported by TransactionListComponent directly.
 import { ButtonModule } from 'primeng/button'; // For potential buttons
 import { InputTextModule } from 'primeng/inputtext'; // For potential filters
 
 @NgModule({
   declarations: [
-    TransactionListComponent
+    // TransactionListComponent removed
   ],
   imports: [
     CommonModule,
     TransactionsRoutingModule,
-    SharedModule,    // Add SharedModule
-    TableModule,     // Add TableModule
-    TagModule,       // Add TagModule
-    ButtonModule,
-    InputTextModule
+    ButtonModule, // Keep ButtonModule
+    InputTextModule, // Keep InputTextModule
+    TransactionListComponent // Add TransactionListComponent here
   ]
 })
 export class TransactionsModule { }

@@ -1,9 +1,18 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Added CommonModule for basic directives
+import { CardModule } from 'primeng/card'; // Added CardModule for p-card
+import { SharedModule } from '../../../../shared/shared.module'; // Added SharedModule for CurrencyFormatPipe
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  standalone: true, // Added standalone: true
+  imports: [
+    CommonModule,
+    CardModule,
+    SharedModule
+  ]
 })
 export class DashboardComponent {
   someAmount: number = 12345.67;

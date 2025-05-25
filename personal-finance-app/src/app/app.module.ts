@@ -11,9 +11,10 @@ import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 
 
+import { AppComponent } from './app.component'; // Ensure AppComponent is imported
+
 @NgModule({
   declarations: [
-    AppComponent
     // CurrencyFormatPipe removed
   ],
   imports: [
@@ -21,9 +22,10 @@ import { ButtonModule } from 'primeng/button';
     BrowserAnimationsModule, // Keep one instance
     HttpClientModule,       // Keep one instance
     AppRoutingModule,
-    ButtonModule            // Add ButtonModule for p-button in AppComponent template
+    // ButtonModule removed as it's now in AppComponent's imports
+    AppComponent // Add AppComponent here
   ],
   providers: [], // SocialAuthServiceConfig is provided in AuthModule
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // AppComponent is still bootstrapped
 })
 export class AppModule { }
