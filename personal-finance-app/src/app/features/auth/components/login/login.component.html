@@ -1,0 +1,10 @@
+<div class="login-container">
+  <button *ngIf="!user" (click)="signInWithGoogle()" pButton type="button" label="Sign in with Google" icon="pi pi-google" class="p-button-danger"></button>
+
+  <div *ngIf="user">
+    <p>Welcome, {{ user.name }}!</p>
+    <p>Email: {{ user.email }}</p>
+    <!-- Basic sign out, actual sign out logic should be handled in the component -->
+    <button (click)="authService.signOut()" pButton type="button" label="Sign Out" class="p-button-warning"></button>
+  </div>
+</div>

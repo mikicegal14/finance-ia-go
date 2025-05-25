@@ -1,0 +1,31 @@
+<div class="transaction-list-container p-p-4">
+  <h2>Transaction History</h2>
+
+  <p-table [value]="mockTransactions" [paginator]="true" [rows]="5" styleClass="p-datatable-striped">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+        <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
+        <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>
+        <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tx>
+      <tr>
+        <td>{{ tx.date | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ tx.description }}</td>
+        <td [ngClass]="{'positive-value': tx.type === 'income', 'negative-value': tx.type === 'expense'}">
+          {{ tx.amount | currencyFormat }}
+        </td>
+        <td>
+          <p-tag [value]="tx.type" [severity]="tx.type === 'income' ? 'success' : 'danger'"></p-tag>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No transactions found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

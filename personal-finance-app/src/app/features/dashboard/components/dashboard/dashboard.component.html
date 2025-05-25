@@ -1,0 +1,50 @@
+<div class="dashboard-container p-p-4">
+  <h2>Dashboard Overview</h2>
+
+  <p-card header="Summary" styleClass="p-mb-3">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="summary-item">
+          <span class="item-label">Total Balance:</span>
+          <span class="item-value positive-value">{{ someAmount | currencyFormat }}</span>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="summary-item">
+          <span class="item-label">Recent Income:</span>
+          <span class="item-value positive-value">{{ anotherAmount | currencyFormat }}</span>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="summary-item">
+          <span class="item-label">Recent Expense:</span>
+          <span class="item-value negative-value">{{ expenseAmount | currencyFormat }}</span>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="summary-item">
+          <span class="item-label">Savings Goal:</span>
+          <span class="item-value">{{ largeAmount | currencyFormat }}</span>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="summary-item">
+          <span class="item-label">Zero Balance Test:</span>
+          <span class="item-value">{{ zeroAmount | currencyFormat }}</span>
+        </div>
+      </div>
+    </div>
+  </p-card>
+
+  <p-card header="Details (Formatted with Pipe)" styleClass="p-mt-3">
+     <p>Formatted Amount (default decimals): {{ 12345.6789 | currencyFormat }}</p>
+     <p>Formatted Amount (0 decimals): {{ 12345 | currencyFormat:0:0 }}</p>
+     <p>Formatted Amount (4 decimals): {{ 12345.6789 | currencyFormat:2:4 }}</p>
+     <p>Another Formatted Amount: {{ 987.65 | currencyFormat }}</p>
+  </p-card>
+
+  <!-- Placeholder for future charts or more detailed dashboard items -->
+  <div class="p-mt-4">
+    <h4>Coming Soon: Charts and More!</h4>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div>
+  <header *ngIf="user" class="app-header">
+    <h1>Welcome, {{ user.name }}</h1>
+    <p>Email: {{ user.email }}</p>
+    <button pButton type="button" label="Sign Out" (click)="signOut()" class="p-button-danger"></button>
+  </header>
+
+  <nav *ngIf="user" class="app-navigation p-d-flex p-jc-center p-mb-3">
+    <button pButton type="button" label="Dashboard" icon="pi pi-th-large" class="p-button-text" routerLink="/dashboard" routerLinkActive="active-nav-link"></button>
+    <button pButton type="button" label="Transactions" icon="pi pi-list" class="p-button-text" routerLink="/transactions" routerLinkActive="active-nav-link"></button>
+    <button pButton type="button" label="Settings" icon="pi pi-cog" class="p-button-text" routerLink="/settings" routerLinkActive="active-nav-link"></button>
+  </nav>
+
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer *ngIf="user" class="app-footer">
+    <p>&copy; 2024 Personal Finance App</p>
+  </footer>
+</div>
+
+<!-- Fallback content if user is not logged in and router-outlet is empty -->
+<div *ngIf="!user && router.url === '/'">
+  <p>Please log in to continue.</p>
+  <!-- This will typically be handled by the router redirecting to /auth/login -->
+</div>
